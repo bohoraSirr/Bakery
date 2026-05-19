@@ -28,16 +28,50 @@ const trendingItems = [
 const Hero = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
+    const [touchStart, setTouchStart] = useState(null);
+    const [touchEnd, setTouchEnd] = useState(null);
 
     const nextSlide = useCallback(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % trendingItems.length);
     }, []);
 
+    const prevSlide = useCallback(() => {
+        setCurrentIndex((prevIndex) => (prevIndex - 1 + trendingItems.length) % trendingItems.length);
+    }, []);
+
+    // Swipe Threshold
+    const minSwipeDistance = 50;
+
+    const handleTouchStart = (e) => {
+        setTouchEnd(null);
+        setTouchStart(e.targetTouches[0].clientX);
+        setIsHovered(true); // Pause sliding on touch
+    };
+
+    const handleTouchMove = (e) => {
+        setTouchEnd(e.targetTouches[0].clientX);
+    };
+
+    const handleTouchEnd = () => {
+        setIsHovered(false); // Resume auto-sliding after touch lift
+        if (!touchStart || !touchEnd) return;
+
+        const distance = touchStart - touchEnd;
+        const isLeftSwipe = distance > minSwipeDistance;
+        const isRightSwipe = distance < -minSwipeDistance;
+
+        if (isLeftSwipe) {
+            nextSlide();
+        } else if (isRightSwipe) {
+            prevSlide();
+        }
+    };
+
     useEffect(() => {
         let intervalId;
-        // Auto-slide every 3 seconds if not hovered
+        // Auto-slide every 4 seconds if not hovered/touched
         if (!isHovered) {
-            intervalId = setInterval(nextSlide, 3000);
+            intervalId = setInterval(nextSlide, 4000);
         }
         return () => {
             if (intervalId) {
@@ -51,6 +85,9 @@ const Hero = () => {
             className="hero-container"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
         >
             {trendingItems.map((item, index) => (
                 <div
@@ -62,7 +99,6 @@ const Hero = () => {
                     <div className="hero-overlay"></div>
 
                     <div className="hero-content">
-                        <span className="trending-badge">Trending 🔥</span>
                         <h1 className="hero-title">{item.title}</h1>
                         <p className="hero-desc">{item.description}</p>
 
@@ -77,6 +113,14 @@ const Hero = () => {
                     </div>
                 </div>
             ))}
+
+            {/* Left and Right Nav Arrows */}
+            <button className="hero-nav-btn prev" onClick={prevSlide} aria-label="Previous Slide">
+                &#10094;
+            </button>
+            <button className="hero-nav-btn next" onClick={nextSlide} aria-label="Next Slide">
+                &#10095;
+            </button>
 
             {/* Slide indicators at the bottom */}
             <div className="hero-indicators">

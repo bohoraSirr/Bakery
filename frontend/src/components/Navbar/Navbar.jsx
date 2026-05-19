@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Search, User, Moon, Sun, Croissant, ShoppingCart } from 'lucide-react';
+import { Search, User, Moon, Sun, Croissant, ShoppingCart, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
   const [isDark, setIsDark] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     // Check local storage or system preference on mount
@@ -49,12 +50,12 @@ const Navbar = () => {
         </div>
 
         {/* Middle: Navigation Links */}
-        <div className="navbar-middle">
+        <div className={`navbar-middle ${isOpen ? 'open' : ''}`}>
           <ul className="nav-links">
-            <li><Link to="/" className="nav-link active">Home</Link></li>
-            <li><Link to="/about" className="nav-link">About Us</Link></li>
-            <li><Link to="/contact" className="nav-link">Contact</Link></li>
-            <li><Link to="/shop" className="nav-link">Shop Address</Link></li>
+            <li><Link to="/" className="nav-link active" onClick={() => setIsOpen(false)}>Home</Link></li>
+            <li><Link to="/about" className="nav-link" onClick={() => setIsOpen(false)}>About Us</Link></li>
+            <li><Link to="/contact" className="nav-link" onClick={() => setIsOpen(false)}>Contact</Link></li>
+            <li><Link to="/shop" className="nav-link" onClick={() => setIsOpen(false)}>Shop Address</Link></li>
           </ul>
         </div>
 
@@ -73,9 +74,13 @@ const Navbar = () => {
             <span className="cart-badge">0</span>
           </button>
 
-          <Link to="/login" className="icon-btn profile-btn" aria-label="Profile">
+          <Link to="/login" className="icon-btn profile-btn" aria-label="Profile" onClick={() => setIsOpen(false)}>
             <User size={22} />
           </Link>
+
+          <button className="icon-btn menu-toggle" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle Menu">
+            {isOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
       </div>
     </nav>

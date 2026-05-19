@@ -1,58 +1,78 @@
 .product-categories-section {
-  padding: 1.5rem 0;
+  padding: 1rem 0;
   width: 100%;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 :root.dark .product-categories-section {
-  border-top: 1px solid rgba(212, 175, 55, 0.1);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.product-categories-wrapper {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 3rem;
+  display: flex;
+  align-items: center;
 }
 
 .product-categories-container {
   display: flex;
   flex-wrap: nowrap;
   gap: 1.5rem;
-  justify-content: center;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
   overflow-x: auto;
   white-space: nowrap;
   scrollbar-width: none;
+  cursor: grab;
+  scroll-behavior: smooth;
+  width: 100%;
+  padding: 0.5rem 0;
 }
 
 .product-categories-container::-webkit-scrollbar {
   display: none;
 }
 
+.product-categories-container.dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+  /* Instant tracking on drag */
+}
+
 .category-separator {
   color: var(--primary-gold-dim, #b8972e);
   font-size: 0.8rem;
   opacity: 0.5;
+  user-select: none;
 }
 
 /* Default (Light Mode) */
 .category-item {
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
   color: #1a1a1a;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   font-weight: 500;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-family: var(--font-sans, sans-serif);
   letter-spacing: 0.5px;
   background-color: transparent;
   opacity: 0;
   animation: fadeIn 0.8s ease-out forwards;
+  user-select: none;
+  /* Prevents text selection highlight during drag scroll */
 }
 
 /* Light mode hover */
 .category-item:hover {
   background-color: #1a1a1a;
   color: #ffffff;
+  transform: translateY(-2px);
 }
 
 /* Dark mode styles */
@@ -64,4 +84,52 @@
 :root.dark .category-item:hover {
   background-color: #ffffff;
   color: #000000;
+  transform: translateY(-2px);
+}
+
+/* Category Navigation Arrow Buttons */
+.nav-arrow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--surface-color, #1a1818);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  color: var(--text-main, #f0e6d2);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-arrow-btn:hover {
+  background: var(--primary-gold, #d4af37);
+  color: #000;
+  border-color: var(--primary-gold, #d4af37);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
+}
+
+.nav-arrow-btn.prev {
+  left: 0.5rem;
+}
+
+.nav-arrow-btn.next {
+  right: 0.5rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
