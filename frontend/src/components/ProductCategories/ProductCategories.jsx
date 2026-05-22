@@ -1,12 +1,18 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import './ProductCategories.css';
+import React, { useRef, useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import "./ProductCategories.css";
 
 const categories = [
-  'Cakes', 'Pastries', 'Donuts', 'Breads', 'Cookies', 'Custom Orders', 'Desserts'
+  "All",
+  "Cakes",
+  "Pastries",
+  "Donuts",
+  "Bread",
+  "Cookies",
+  "Desserts",
 ];
 
-const ProductCategories = () => {
+const ProductCategories = ({ selectedCategory, onSelectCategory }) => {
   const containerRef = useRef(null);
   const [isDown, setIsDown] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -26,17 +32,17 @@ const ProductCategories = () => {
   useEffect(() => {
     const el = containerRef.current;
     if (el) {
-      el.addEventListener('scroll', checkScrollArrows);
+      el.addEventListener("scroll", checkScrollArrows);
       // Run once on load
       checkScrollArrows();
       // Handle resize
-      window.addEventListener('resize', checkScrollArrows);
+      window.addEventListener("resize", checkScrollArrows);
     }
     return () => {
       if (el) {
-        el.removeEventListener('scroll', checkScrollArrows);
+        el.removeEventListener("scroll", checkScrollArrows);
       }
-      window.removeEventListener('resize', checkScrollArrows);
+      window.removeEventListener("resize", checkScrollArrows);
     };
   }, []);
 
@@ -66,10 +72,10 @@ const ProductCategories = () => {
   // Button Scroll Actions
   const scroll = (direction) => {
     if (containerRef.current) {
-      const scrollAmount = direction === 'left' ? -200 : 200;
+      const scrollAmount = direction === "left" ? -200 : 200;
       containerRef.current.scrollBy({
         left: scrollAmount,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
   };
@@ -79,14 +85,18 @@ const ProductCategories = () => {
       <div className="product-categories-wrapper">
         {/* Left Arrow Button */}
         {showLeftArrow && (
-          <button className="nav-arrow-btn prev" onClick={() => scroll('left')} aria-label="Scroll Left">
+          <button
+            className="nav-arrow-btn prev"
+            onClick={() => scroll("left")}
+            aria-label="Scroll Left"
+          >
             <ChevronLeft size={20} />
           </button>
         )}
 
-        <div 
+        <div
           ref={containerRef}
-          className={`product-categories-container ${isDown ? 'dragging' : ''}`}
+          className={`product-categories-container ${isDown ? "dragging" : ""}`}
           onMouseDown={handleMouseDown}
           onMouseLeave={handleMouseLeave}
           onMouseUp={handleMouseUp}
@@ -94,17 +104,29 @@ const ProductCategories = () => {
         >
           {categories.map((category, index) => (
             <React.Fragment key={index}>
-              <span className="category-item" style={{ animationDelay: `${index * 0.1}s` }}>
+              <button
+                type="button"
+                className={`category-item ${selectedCategory === category ? "active" : ""}`}
+                style={{ animationDelay: `${index * 0.1}s` }}
+                onClick={() => onSelectCategory(category)}
+                aria-pressed={selectedCategory === category}
+              >
                 {category}
-              </span>
-              {index < categories.length - 1 && <span className="category-separator">•</span>}
+              </button>
+              {index < categories.length - 1 && (
+                <span className="category-separator">•</span>
+              )}
             </React.Fragment>
           ))}
         </div>
 
         {/* Right Arrow Button */}
         {showRightArrow && (
-          <button className="nav-arrow-btn next" onClick={() => scroll('right')} aria-label="Scroll Right">
+          <button
+            className="nav-arrow-btn next"
+            onClick={() => scroll("right")}
+            aria-label="Scroll Right"
+          >
             <ChevronRight size={20} />
           </button>
         )}

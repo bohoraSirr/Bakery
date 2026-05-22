@@ -1,10 +1,11 @@
-import { Routes, Route } from 'react-router-dom'
-import Navbar from './components/Navbar/Navbar'
-import Footer from './components/Footer/Footer'
-import Home from './pages/Home/Home'
-import Login from './pages/Login/Login'
-import ProductDetail from './pages/ProductDetail/ProductDetail'
-import './App.css'
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
+import Home from "./pages/Home";
+import Login from "./pages/Login/Login";
+import ProductDetail from "./pages/ProductDetail/ProductDetail";
+import "./App.css";
+import AboutUs from "./pages/AboutUs/Aboutus";
 
 function App() {
   return (
@@ -13,13 +14,14 @@ function App() {
       <main className="main-content">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about-us" element={<AboutUs />} />
           <Route path="/login" element={<Login />} />
           <Route path="/product/:id" element={<ProductDetail />} />
         </Routes>
       </main>
       <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

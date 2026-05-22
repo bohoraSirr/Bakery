@@ -1,46 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap");
 
 :root {
-  /* Premium Orange, White, Black & Pink Theme */
-  --bg-color: #ff7e47; /* Bakery fresh Orange background */
-  --surface-color: #ffffff; /* Crisp white cards and containers */
-  --surface-color-light: #fff3ed; /* Soft light orange-white details */
-  --primary-gold: #ff2a74; /* Stylish electric Pink for buttons and highlights */
-  --primary-gold-dim: #e01b5d;
-  --text-main: #0c0a09; /* Deep charcoal black main text */
-  --text-muted: #57534e; /* Muted slate text */
+  /* Soft warm bakery palette */
+  --bg-color: #f8f1ea;
+  --surface-color: #fffaf5;
+  --surface-color-light: #f3e6db;
+  --primary-gold: #c98b6b;
+  --primary-gold-dim: #a96c4f;
+  --text-main: #2f221d;
+  --text-muted: #6f6058;
 
   /* Navigation & Action Theme Overrides */
-  --accent: #ff2a74; /* Electric pink accents */
-  --logo-color: #0c0a09;
-  --icon-color: #0c0a09;
-  --nav-bg: rgba(255, 255, 255, 0.88);
-  --nav-border: rgba(12, 10, 9, 0.08);
+  --accent: #c98b6b;
+  --logo-color: #2f221d;
+  --icon-color: #2f221d;
+  --nav-bg: rgba(255, 250, 245, 0.88);
+  --nav-border: rgba(47, 34, 29, 0.08);
   --glass-blur: blur(12px);
-  --shadow: 0 8px 30px rgba(12, 10, 9, 0.08);
+  --shadow: 0 8px 30px rgba(47, 34, 29, 0.08);
 
-  --font-serif: 'Playfair Display', serif;
-  --font-sans: 'Inter', sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
 
   --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 :root.dark {
-  /* High contrast Dark Mode counterpart */
-  --bg-color: #0c0a09; /* Premium deep black-brown background */
-  --surface-color: #1c1917; /* Dark slate gray surface elements */
+  /* Warm dark mode counterpart */
+  --bg-color: #201813;
+  --surface-color: #2f241e;
   --surface-color-light: #292524;
-  --primary-gold: #ff7e47; /* Vibrant orange primary accents in dark mode */
-  --primary-gold-dim: #e0622d;
-  --text-main: #fafaf9; /* Crisp white main text */
-  --text-muted: #a8a29e; /* Soft white-gray text */
+  --primary-gold: #d3a185;
+  --primary-gold-dim: #b97e61;
+  --text-main: #f8f1ea;
+  --text-muted: #c7b5aa;
 
-  --accent: #ff7e47; /* Vibrant orange accents */
-  --logo-color: #fafaf9;
-  --icon-color: #fafaf9;
-  --nav-bg: rgba(12, 10, 9, 0.88);
-  --nav-border: rgba(250, 250, 249, 0.1);
-  --shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  --accent: #d3a185;
+  --logo-color: #f8f1ea;
+  --icon-color: #f8f1ea;
+  --nav-bg: rgba(32, 24, 19, 0.88);
+  --nav-border: rgba(248, 241, 234, 0.1);
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
 }
 
 * {
@@ -119,7 +119,7 @@ a {
   background-color: #fff;
   color: var(--primary-gold);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 4px 15px rgba(201, 139, 107, 0.3);
 }
 
 /* Container */

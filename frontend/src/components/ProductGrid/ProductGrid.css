@@ -1,6 +1,6 @@
 /* src/components/ProductGrid/ProductGrid.css */
 .product-grid-section {
-  padding: 4rem 2rem;
+  padding: 4rem 2rem 5rem;
   width: 100%;
 }
 
@@ -9,63 +9,83 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+  gap: 2rem;
 }
 
-.category-row-wrapper {
+.product-grid-header {
   display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(75, 46, 43, 0.08);
 }
 
-.category-row-title {
-  font-size: 2.2rem;
-  font-family: var(--font-serif);
+.product-grid-kicker {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  font-size: 0.78rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.product-grid-title {
+  margin: 0.35rem 0 0;
+  font-size: clamp(2rem, 3.5vw, 3rem);
   color: var(--text-main);
-  position: relative;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
+  line-height: 1;
 }
 
-.category-row-title::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 60px;
-  height: 3px;
-  background-color: var(--primary-gold);
-  border-radius: 2px;
+.product-grid-description {
+  margin: 0.55rem 0 0;
+  max-width: 52ch;
+  color: var(--text-muted);
+  font-size: 1.03rem;
+  line-height: 1.7;
 }
 
-.category-row-grid {
+.product-grid-items {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem;
 }
 
-@media (min-width: 900px) {
+.product-card--featured {
+  opacity: 0;
+  animation: productCardIn 0.45s ease forwards;
+}
 
-  .cakes-row,
-  .donuts-row {
-    grid-template-columns: 1.2fr 2fr;
+@keyframes productCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
   }
 
-  .pastries-row {
-    grid-template-columns: 2fr 1.2fr;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* Small products grid */
-.small-products-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+@media (max-width: 1024px) {
+  .product-grid-items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
-@media (min-width: 600px) {
-  .small-products-grid {
-    grid-template-columns: 1fr 1fr;
+@media (max-width: 640px) {
+  .product-grid-section {
+    padding-inline: 1rem;
+  }
+
+  .product-grid-header {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .product-grid-items {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -78,14 +98,17 @@
   overflow: hidden;
   text-decoration: none;
   color: inherit;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
-  border: 1px solid rgba(212, 175, 55, 0.1);
+  box-shadow: 0 16px 35px rgba(43, 27, 23, 0.08);
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s ease;
+  border: 1px solid rgba(212, 163, 115, 0.14);
+  min-height: 100%;
 }
 
 .product-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 24px 48px rgba(43, 27, 23, 0.16);
 }
 
 .product-image-container {
@@ -134,77 +157,4 @@
   color: var(--primary-gold);
   margin: 0;
   margin-top: 0.5rem;
-}
-
-/* Big Order Now Card */
-.big-order-card {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 3rem 2rem;
-  text-align: center;
-  min-height: 350px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.4s ease;
-}
-
-.big-order-card:hover {
-  transform: translateY(-4px);
-}
-
-.cake-theme {
-  background-image: url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=800');
-}
-
-.pastry-theme {
-  background-image: url('https://images.unsplash.com/photo-1555507036-ab1e4006aa07?auto=format&fit=crop&q=80&w=800');
-}
-
-.donut-theme {
-  background-image: url('https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&q=80&w=800');
-}
-
-.order-card-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(13, 12, 12, 0.9) 0%, rgba(26, 24, 24, 0.75) 100%);
-  z-index: 1;
-}
-
-.order-card-content {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-.order-card-content h3 {
-  font-size: 2.2rem;
-  font-family: var(--font-serif);
-  color: var(--primary-gold);
-  margin: 0;
-}
-
-.order-card-content p {
-  font-size: 1.1rem;
-  color: var(--text-muted);
-  max-width: 250px;
-  margin: 0;
-}
-
-.order-now-btn {
-  margin-top: 1rem;
-  padding: 0.8rem 2rem;
-  font-size: 1rem;
 }
