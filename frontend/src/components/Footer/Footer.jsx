@@ -3,7 +3,7 @@ import { MapPin, Phone, Mail } from "lucide-react";
 import { SocialIcon } from "react-social-icons";
 import "./Footer.css";
 
-const MAP_PLACE_QUERY = "Phoksundo Jharna Hotel and Restaurant";
+const MAP_PLACE_QUERY = "Smrit Bakery Shop";
 const MAP_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(MAP_PLACE_QUERY)}&output=embed`;
 
 const Footer = () => {
@@ -70,7 +70,7 @@ const Footer = () => {
             <div className="footer-contact-map">
               <ul className="footer-contact">
                 <li>
-                  <MapPin size={18} /> Phoksundo Jharna Hotel and Restaurant
+                  <MapPin size={18} /> Smrit Bakery Shop
                 </li>
                 <li>
                   <Phone size={18} /> (+977) 9848131750{" "}
@@ -92,10 +92,10 @@ const Footer = () => {
 
               <div
                 className="footer-map-card"
-                aria-label="Phoksundo Jharna Hotel and Restaurant location map"
+                aria-label="Smrit Bakery Shop location map"
               >
                 <iframe
-                  title="Phoksundo Jharna Hotel and Restaurant location map"
+                  title="Smrit Bakery Shop location map"
                   src={MAP_EMBED_URL}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
@@ -103,7 +103,7 @@ const Footer = () => {
                 />
                 <div className="footer-map-card__overlay">
                   <span>Visit us on the map</span>
-                  <strong>Phoksundo Jharna Hotel and Restaurant</strong>
+                  <strong>Smrit Bakery Shop</strong>
                 </div>
               </div>
             </div>
